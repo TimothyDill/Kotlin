@@ -9,6 +9,7 @@ var userName : String = ""
 var usr : String? = null
 var pn : Int? = null
 var pin: String = ""
+var loggedIn = false
 // ---
 
 fun pin() {
@@ -21,6 +22,13 @@ fun pin() {
         pin = pinTest1.toString()
             userSet = setOf(userName, pin) // Need to find a way to make a table for these?
         addUserSet(userSet) // Not sure if this is working - looking for input
+        loggedIn = true
+        println("Would you like to log in now? (Y/N)")
+            if(readln() == "Y"){
+                existingUser()
+            } else {
+                "User Created"
+            }
     } else {
         pinRetry()
     }
@@ -32,7 +40,21 @@ fun newUser() {
     userName = readln()
     pin()
     }
+fun existingUser(){
+    if (userName == ""){
+        ("User Name:")
+        usr = readln()
+    } else {
 
+    }
+
+    println("Enter Pin:")
+    pn = readln().toInt()
+    loggedIn = true
+
+    println("Login Complete")
+
+}
 fun pinRetry(){
     println("Please try again, pin mismatch")
     pin()
@@ -44,17 +66,12 @@ fun loginType() {
     val loginType : String = readln().lowercase()
         when (loginType) {
             "new" -> newUser()
-            "existing" -> {
-                println("User Name:")
-                usr = readln()
-                println("Enter Pin:")
-                pn = readln().toInt()
-
-                println("Complete Login")
-            }
+            "existing" -> existingUser()
             "admin" -> {
                 println("Users:")
                 println(listOfUsers)
+                userName = "Admin"
+                loggedIn = true
             }
             else -> {
                 print("Try again")
@@ -67,5 +84,6 @@ fun main() {
     val appName = "MiniVis"
     println("Welcome to $appName")
     loginType()
+    println("Welcome $userName")
 
 }
