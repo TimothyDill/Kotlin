@@ -42,19 +42,29 @@ fun newUser() {
     }
 fun existingUser(){
     if (userName == ""){
-        ("User Name:")
+        println("User Name:")
         usr = readln()
+
+        println("Enter Pin:")
+        pn = readln().toInt()
+        loggedIn = true
+
+        println("Login Complete")
     } else {
+        println("$userName, please input your pin:")
+        pn = readln().toInt()
+            if(pn == 1111) { // Testing with a set pin
+            loggedIn = true
+            } else {
+                println("Wrong Pin Entered, Try again.")
+                existingUser()
+            }
 
     }
 
-    println("Enter Pin:")
-    pn = readln().toInt()
-    loggedIn = true
-
-    println("Login Complete")
-
 }
+
+
 fun pinRetry(){
     println("Please try again, pin mismatch")
     pin()
@@ -84,6 +94,10 @@ fun main() {
     val appName = "MiniVis"
     println("Welcome to $appName")
     loginType()
-    println("Welcome $userName")
+    if (loggedIn == true){
+        println("Welcome $userName")
+    } else {
+        println("Err1")
+    }
 
 }
