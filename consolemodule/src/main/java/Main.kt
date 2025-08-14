@@ -1,7 +1,7 @@
 import database.addUserSet
 import database.listOfUsers
 
-// Whitespace
+// ----- Whitespace
 var pinTest1 : Int? = null
 var pinTest2 : Int? = null
 var userSet : Set<String> = emptySet()
@@ -10,7 +10,6 @@ var pn : Int? = null
 var pin: String = ""
 var loggedIn = false
 // ---
-
 fun pin() {
     println("Hello $userName, please input a pin - max of 4 digits")
     pinTest1 = readln().toInt()
@@ -19,7 +18,7 @@ fun pin() {
     if (pinTest1 == pinTest2) {
         println("User Created - Returning to Login Screen.\n" )
         pin = pinTest1.toString()
-            userSet = setOf(userName, pin) // Need to find a way to make a table for these?
+        userSet = setOf(userName, pin) // Need to find a way to make a table for these?
         addUserSet(userSet) // Not sure if this is working - looking for input
         loggedIn = true
         println("Would you like to log in now? (Y/N)")
@@ -32,8 +31,6 @@ fun pin() {
         pinRetry()
     }
 }
-
-
 fun newUser() {
     println("Please input a user name:")
     userName = readln()
@@ -43,60 +40,50 @@ fun existingUser(){
     if (userName == ""){
         println("User Name:")
         userName = readln()
-
         println("Enter Pin:")
         pn = readln().toInt()
         loggedIn = true
-
         println("Login Complete")
     } else {
         println("$userName, please input your pin:")
         pn = readln().toInt()
-            if(pn == 1111) { // Testing with a set pin
+        if(pn == 1111) { // Testing with a set pin
             loggedIn = true
             } else {
                 println("Wrong Pin Entered, Try again.")
                 existingUser()
             }
-
     }
-
 }
-
-
 fun pinRetry(){
     println("Please try again, pin mismatch")
     pin()
-
 }
-
 fun loginType() {
     println("Are you a new('New') or existing('Existing') user?")
     val loginType : String = readln().lowercase()
-        when (loginType) {
-            "new" -> newUser()
-            "existing" -> existingUser()
-            "admin" -> {
-                println("Users:")
-                println(listOfUsers)
-                userName = "Admin"
-                loggedIn = true
-            }
-            else -> {
-                print("Try again")
-                loginType()
-            }
+    when (loginType) {
+        "new" -> newUser()
+        "existing" -> existingUser()
+        "admin" -> {
+            println("Users:")
+            println(listOfUsers)
+            userName = "Admin"
+            loggedIn = true
+        }
+        else -> {
+            print("Try again")
+            loginType()
+        }
     }
 }
-
 fun main() {
     val appName = "MiniVis"
     println("Welcome to $appName")
     loginType()
-    if (loggedIn == true){
+    if (loggedIn){
         println("Welcome $userName")
     } else {
         println("Err1")
     }
-
 }
